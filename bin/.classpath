@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="Highcharts-2.3.3/exporting-server/java/highcharts-export/src/main/java/|Highstock-1.2.4/exporting-server/java/highcharts-export/src/main/java/" kind="src" path=""/>
+	<classpathentry kind="src" path="Highcharts-2.3.3/exporting-server/java/highcharts-export/src/main/java"/>
+	<classpathentry kind="src" path="Highstock-1.2.4/exporting-server/java/highcharts-export/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

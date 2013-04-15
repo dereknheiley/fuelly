@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+<html debug="true"><head>
+<title>Highcharts Demo - Ajax loaded data, clickable points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--  meta http-equiv="X-UA-Compatible" content="chrome=1" -->
+
+<link rel="shortcut icon" href="http://www.highcharts.com/favicon.ico">
+
+
+
+
+<script type="text/javascript" src="line-ajax_files/jquery.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+
+<!-- Highslide code -->
+<script type="text/javascript" src="line-ajax_files/highslide-full.js"></script>
+<script type="text/javascript" src="line-ajax_files/highslide.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="line-ajax_files/highslide.css">
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="/highslide/highslide-ie6.css" />
+<![endif]-->
+<!-- End Highslide code -->
+
+<script type="text/javascript">
+var example = 'line-ajax',
+	theme = 'default';
+</script>
+
+<script type="text/javascript" src="line-ajax_files/scripts.js"></script>
+
+
+<link rel="stylesheet" href="line-ajax_files/template.css" type="text/css">
+<link rel="stylesheet" href="line-ajax_files/brown.css" type="text/css">
+<link href="line-ajax_files/demo.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+
+(function($){ // encapsulate jQuery
+
+$(function () {
+    var chart;
+    $(document).ready(function() {
+    
+        // define the options
+        var options = {
+    
+            chart: {
+                renderTo: 'container'
+            },
+    
+            title: {
+                text: 'Daily visits at www.highcharts.com'
+            },
+    
+            subtitle: {
+                text: 'Source: Google Analytics'
+            },
+    
+            xAxis: {
+                type: 'datetime',
+                tickInterval: 7 * 24 * 3600 * 1000, // one week
+                tickWidth: 0,
+                gridLineWidth: 1,
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: -3
+                }
+            },
+    
+            yAxis: [{ // left y axis
+                title: {
+                    text: null
+                },
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: 16,
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value, 0);
+                    }
+                },
+                showFirstLabel: false
+            }, { // right y axis
+                linkedTo: 0,
+                gridLineWidth: 0,
+                opposite: true,
+                title: {
+                    text: null
+                },
+                labels: {
+                    align: 'right',
+                    x: -3,
+                    y: 16,
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value, 0);
+                    }
+                },
+                showFirstLabel: false
+            }],
+    
+            legend: {
+                align: 'left',
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                borderWidth: 0
+            },
+    
+            tooltip: {
+                shared: true,
+                crosshairs: true
+            },
+    
+            plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                hs.htmlExpand(null, {
+                                    pageOrigin: {
+                                        x: this.pageX,
+                                        y: this.pageY
+                                    },
+                                    headingText: this.series.name,
+                                    maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) +':<br/> '+
+                                        this.y +' visits',
+                                    width: 200
+                                });
+                            }
+                        }
+                    },
+                    marker: {
+                        lineWidth: 1
+                    }
+                }
+            },
+    
+            series: [{
+                name: 'All visits',
+                lineWidth: 4,
+                marker: {
+                    radius: 4
+                }
+            }, {
+                name: 'New visitors'
+            }]
+        };
+    
+    
+        // Load data asynchronously using jQuery. On success, add the data
+        // to the options and initiate the chart.
+        // This data is obtained by exporting a GA custom report to TSV.
+        // http://api.jquery.com/jQuery.get/
+        jQuery.get('analytics.tsv', null, function(tsv, state, xhr) {
+            var lines = [],
+                listen = false,
+                date,
+    
+                // set up the two data series
+                allVisits = [],
+                newVisitors = [];
+    
+            // inconsistency
+            if (typeof tsv !== 'string') {
+                tsv = xhr.responseText;
+            }
+    
+            // split the data return into lines and parse them
+            tsv = tsv.split(/\n/g);
+            jQuery.each(tsv, function(i, line) {
+    
+                // listen for data lines between the Graph and Table headers
+                if (tsv[i - 3] == '# Graph') {
+                    listen = true;
+                } else if (line == '' || line.charAt(0) == '#') {
+                    listen = false;
+                }
+    
+                // all data lines start with a double quote
+                if (listen) {
+                    line = line.split(/\t/);
+                    date = Date.parse(line[0] +' UTC');
+    
+                    allVisits.push([
+                        date,
+                        parseInt(line[1].replace(',', ''), 10)
+                    ]);
+                    newVisitors.push([
+                        date,
+                        parseInt(line[2].replace(',', ''), 10)
+                    ]);
+                }
+            });
+    
+            options.series[0].data = allVisits;
+            options.series[1].data = newVisitors;
+    
+            chart = new Highcharts.Chart(options);
+        });
+    });
+    
+});
+})(jQuery);
+</script>
+
+<link href="line-ajax_files/light.css" type="text/css" rel="stylesheet"><style type="text/css">.highslide img {cursor: url(http://www.highcharts.com/highslide/graphics/zoomin.cur), pointer !important;}.highslide-viewport-size {position: fixed; width: 100%; height: 100%; left: 0; top: 0}</style><link href="line-ajax_files/Content.css" type="text/css" rel="stylesheet"></head>
+<body>
+
+<div id="demo-header">
+	<h1>Highcharts Demo - Ajax loaded data, clickable points</h1>
+	<a href="http://www.highcharts.com/">« Go to the Highcharts home page</a>
+	<p>Pick an example on the left and combine it with a preset theme in the top menu. Click 
+	"View options" to inspect the code.</p>
+</div>
+
+
+<div id="demo-menu">
+		<h4>Line and scatter charts</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/line-basic">
+			Basic line</a></li>
+				<li class="active"><a href="http://www.highcharts.com/demo/line-ajax">
+			Ajax loaded data, clickable points</a></li>
+				<li><a href="http://www.highcharts.com/demo/line-labels">
+			With data labels</a></li>
+				<li><a href="http://www.highcharts.com/demo/line-time-series">
+			Time series, zoomable</a></li>
+				<li><a href="http://www.highcharts.com/demo/spline-inverted">
+			Spline with inverted axes</a></li>
+				<li><a href="http://www.highcharts.com/demo/spline-symbols">
+			Spline with symbols</a></li>
+				<li><a href="http://www.highcharts.com/demo/spline-plot-bands">
+			Spline with plot bands</a></li>
+				<li><a href="http://www.highcharts.com/demo/spline-irregular-time">
+			Time data with irregular intervals</a></li>
+				<li><a href="http://www.highcharts.com/demo/line-log-axis">
+			Logarithmic axis</a></li>
+				<li><a href="http://www.highcharts.com/demo/scatter">
+			Scatter plot</a></li>
+			</ul>
+		<h4>Area charts</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/area-basic">
+			Basic area</a></li>
+				<li><a href="http://www.highcharts.com/demo/area-negative">
+			Area with negative values</a></li>
+				<li><a href="http://www.highcharts.com/demo/area-stacked">
+			Stacked area</a></li>
+				<li><a href="http://www.highcharts.com/demo/area-stacked-percent">
+			Percentage area</a></li>
+				<li><a href="http://www.highcharts.com/demo/area-missing">
+			Area with missing points</a></li>
+				<li><a href="http://www.highcharts.com/demo/area-inverted">
+			Inverted axes</a></li>
+				<li><a href="http://www.highcharts.com/demo/areaspline">
+			Area-spline</a></li>
+			</ul>
+		<h4>Column and bar charts</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/bar-basic">
+			Basic bar</a></li>
+				<li><a href="http://www.highcharts.com/demo/bar-stacked">
+			Stacked bar</a></li>
+				<li><a href="http://www.highcharts.com/demo/bar-negative-stack">
+			Bar with negative stack</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-basic">
+			Basic column</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-negative">
+			Column with negative values</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-stacked">
+			Stacked column</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-stacked-and-grouped">
+			Stacked and grouped column</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-stacked-percent">
+			Stacked percentage column</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-rotated-labels">
+			Column with rotated labels</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-drilldown">
+			Column with drilldown</a></li>
+				<li><a href="http://www.highcharts.com/demo/column-parsed">
+			Data defined in a HTML table</a></li>
+			</ul>
+		<h4>Pie charts</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/pie-basic">
+			Pie chart</a></li>
+				<li><a href="http://www.highcharts.com/demo/pie-gradient">
+			Pie with gradient fill</a></li>
+				<li><a href="http://www.highcharts.com/demo/pie-donut">
+			Donut chart</a></li>
+				<li><a href="http://www.highcharts.com/demo/pie-legend">
+			Pie with legend</a></li>
+			</ul>
+		<h4>Dynamic charts</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/dynamic-update">
+			Spline updating each second</a></li>
+				<li><a href="http://www.highcharts.com/demo/dynamic-click-to-add">
+			Click to add a point</a></li>
+				<li><a href="http://www.highcharts.com/demo/dynamic-master-detail">
+			Master-detail chart</a></li>
+			</ul>
+		<h4>Combinations</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/combo">
+			Column, line and pie</a></li>
+				<li><a href="http://www.highcharts.com/demo/combo-dual-axes">
+			Dual axes, line and column</a></li>
+				<li><a href="http://www.highcharts.com/demo/combo-multi-axes">
+			Multiple axes</a></li>
+				<li><a href="http://www.highcharts.com/demo/combo-regression">
+			Scatter with regression line</a></li>
+			</ul>
+		<h4>More chart types</h4>
+	<ul>
+				<li><a href="http://www.highcharts.com/demo/gauge-speedometer">
+			Angular gauge</a></li>
+				<li><a href="http://www.highcharts.com/demo/gauge-clock">
+			Clock</a></li>
+				<li><a href="http://www.highcharts.com/demo/gauge-dual">
+			Gauge with dual axes</a></li>
+				<li><a href="http://www.highcharts.com/demo/gauge-vu-meter">
+			VU meter</a></li>
+				<li><a href="http://www.highcharts.com/demo/arearange">
+			Area range</a></li>
+				<li><a href="http://www.highcharts.com/demo/columnrange">
+			Column range</a></li>
+				<li><a href="http://www.highcharts.com/demo/polar">
+			Polar chart</a></li>
+				<li><a href="http://www.highcharts.com/demo/polar-spider">
+			Spiderweb</a></li>
+				<li><a href="http://www.highcharts.com/demo/polar-wind-rose">
+			Wind rose</a></li>
+			</ul>
+	</div>
+ 
+
+
+<div id="demo-content">
+	
+	<div id="styleswitcher">
+		<ul>
+			<li class="active"><a href="http://www.highcharts.com/demo/line-ajax">Default</a></li>
+			<li><a href="http://www.highcharts.com/demo/line-ajax/grid">Grid</a></li>
+			<li><a href="http://www.highcharts.com/demo/line-ajax/skies">Skies</a></li>
+			<li><a href="http://www.highcharts.com/demo/line-ajax/gray">Gray</a></li>
+			<li><a href="http://www.highcharts.com/demo/line-ajax/dark-blue">Dark blue</a></li>
+			<li><a href="http://www.highcharts.com/demo/line-ajax/dark-green">Dark green</a></li>
+		</ul>
+	</div>
+	<br>
+	<br>
+	<br>
+
+	<div style="margin: 0 1em">
+	<script src="line-ajax_files/highcharts.js"></script>
+<script src="line-ajax_files/exporting.js"></script>
+
+<!-- Additional files for the Highslide popup effect -->
+<script type="text/javascript" src="line-ajax_files/highslide-full.js"></script>
+<script type="text/javascript" src="line-ajax_files/highslide.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="line-ajax_files/highslide.css">
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 975px; height: 400px; text-align: left; line-height: normal; z-index: 0; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: 0.200012px; top: 0px; cursor: auto;" id="highcharts-0" class="highcharts-container"><svg height="400" width="975" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="highcharts-1"><rect stroke-width="0" height="400" width="9999" y="0" x="0" fill="none" ry="0" rx="0"></rect></clipPath><clipPath id="highcharts-2"><rect height="316" width="955" y="0" x="0" fill="none"></rect></clipPath><linearGradient id="highcharts-5" gradientUnits="userSpaceOnUse" y2="20" x2="0" y1="0" x1="0"><stop stop-opacity="1" stop-color="#F7F7F7" offset="0.4"></stop><stop stop-opacity="1" stop-color="#E3E3E3" offset="0.6"></stop></linearGradient><linearGradient id="highcharts-6" gradientUnits="userSpaceOnUse" y2="20" x2="0" y1="0" x1="0"><stop stop-opacity="1" stop-color="#F7F7F7" offset="0.4"></stop><stop stop-opacity="1" stop-color="#E3E3E3" offset="0.6"></stop></linearGradient></defs><rect stroke-width="0" height="400" width="975" y="0" x="0" fill="#FFFFFF" ry="5" rx="5"></rect><g zIndex="1" class="highcharts-grid"><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 268.5 55 L 268.5 371" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 487.5 55 L 487.5 371" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 705.5 55 L 705.5 371" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 923.5 55 L 923.5 371" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 50.5 55 L 50.5 371" fill="none"></path></g><g zIndex="1" class="highcharts-grid"><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 10 292.5 L 965 292.5" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 10 213.5 L 965 213.5" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 10 134.5 L 965 134.5" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 10 55.5 L 965 55.5" fill="none"></path><path zIndex="1" stroke-width="1" stroke="#C0C0C0" d="M 10 371.5 L 965 371.5" fill="none"></path></g><g zIndex="1" class="highcharts-grid"></g><g zIndex="2" class="highcharts-axis"><path visibility="visible" zIndex="7" stroke-width="1" stroke="#C0D0E0" d="M 10 371.5 L 965 371.5" fill="none"></path></g><g zIndex="2" class="highcharts-axis"></g><g zIndex="2" class="highcharts-axis"></g><path visibility="hidden" zIndex="2" stroke="#C0C0C0" stroke-width="1" d="M 81.5 55 L 81.5 371" fill="none"></path><g zIndex="3" class="highcharts-series-group"><g clip-path="url(#highcharts-2)" transform="translate(10,55)" zIndex="0.1" visibility="visible" class="highcharts-series"><path transform="translate(1, 1)" stroke-opacity="0.049999999999999996" isShadow="true" zIndex="1" stroke-width="5" stroke="black" d="M 9.362745098039214 239.7 L 40.5718954248366 120.5 L 71.78104575163398 52.5 L 102.99019607843137 62.3 L 134.19934640522874 60.9 L 165.40849673202612 94.6 L 196.6176470588235 223.7 L 227.8267973856209 228.3 L 259.0359477124183 70.2 L 290.2450980392157 32.4 L 321.4542483660131 37.2 L 352.66339869281046 38 L 383.87254901960785 24 L 415.08169934640523 205.4 L 446.2908496732026 213.1 L 477.5 51.5 L 508.7091503267974 31.1 L 539.9183006535948 53.7 L 571.1274509803922 104.5 L 602.3366013071895 95.2 L 633.5457516339869 213.4 L 664.7549019607843 222.1 L 695.9640522875817 64.1 L 727.1732026143791 61.4 L 758.3823529411765 60.8 L 789.5915032679738 31 L 820.8006535947712 83.3 L 852.0098039215686 232.4 L 883.218954248366 228 L 914.4281045751634 96.9 L 945.6372549019608 104.4" fill="none"></path><path transform="translate(1, 1)" stroke-opacity="0.09999999999999999" isShadow="true" zIndex="1" stroke-width="3" stroke="black" d="M 9.362745098039214 239.7 L 40.5718954248366 120.5 L 71.78104575163398 52.5 L 102.99019607843137 62.3 L 134.19934640522874 60.9 L 165.40849673202612 94.6 L 196.6176470588235 223.7 L 227.8267973856209 228.3 L 259.0359477124183 70.2 L 290.2450980392157 32.4 L 321.4542483660131 37.2 L 352.66339869281046 38 L 383.87254901960785 24 L 415.08169934640523 205.4 L 446.2908496732026 213.1 L 477.5 51.5 L 508.7091503267974 31.1 L 539.9183006535948 53.7 L 571.1274509803922 104.5 L 602.3366013071895 95.2 L 633.5457516339869 213.4 L 664.7549019607843 222.1 L 695.9640522875817 64.1 L 727.1732026143791 61.4 L 758.3823529411765 60.8 L 789.5915032679738 31 L 820.8006535947712 83.3 L 852.0098039215686 232.4 L 883.218954248366 228 L 914.4281045751634 96.9 L 945.6372549019608 104.4" fill="none"></path><path transform="translate(1, 1)" stroke-opacity="0.15" isShadow="true" zIndex="1" stroke-width="1" stroke="black" d="M 9.362745098039214 239.7 L 40.5718954248366 120.5 L 71.78104575163398 52.5 L 102.99019607843137 62.3 L 134.19934640522874 60.9 L 165.40849673202612 94.6 L 196.6176470588235 223.7 L 227.8267973856209 228.3 L 259.0359477124183 70.2 L 290.2450980392157 32.4 L 321.4542483660131 37.2 L 352.66339869281046 38 L 383.87254901960785 24 L 415.08169934640523 205.4 L 446.2908496732026 213.1 L 477.5 51.5 L 508.7091503267974 31.1 L 539.9183006535948 53.7 L 571.1274509803922 104.5 L 602.3366013071895 95.2 L 633.5457516339869 213.4 L 664.7549019607843 222.1 L 695.9640522875817 64.1 L 727.1732026143791 61.4 L 758.3823529411765 60.8 L 789.5915032679738 31 L 820.8006535947712 83.3 L 852.0098039215686 232.4 L 883.218954248366 228 L 914.4281045751634 96.9 L 945.6372549019608 104.4" fill="none"></path><path zIndex="1" stroke-width="4" stroke="#4572A7" d="M 9.362745098039214 239.7 L 40.5718954248366 120.5 L 71.78104575163398 52.5 L 102.99019607843137 62.3 L 134.19934640522874 60.9 L 165.40849673202612 94.6 L 196.6176470588235 223.7 L 227.8267973856209 228.3 L 259.0359477124183 70.2 L 290.2450980392157 32.4 L 321.4542483660131 37.2 L 352.66339869281046 38 L 383.87254901960785 24 L 415.08169934640523 205.4 L 446.2908496732026 213.1 L 477.5 51.5 L 508.7091503267974 31.1 L 539.9183006535948 53.7 L 571.1274509803922 104.5 L 602.3366013071895 95.2 L 633.5457516339869 213.4 L 664.7549019607843 222.1 L 695.9640522875817 64.1 L 727.1732026143791 61.4 L 758.3823529411765 60.8 L 789.5915032679738 31 L 820.8006535947712 83.3 L 852.0098039215686 232.4 L 883.218954248366 228 L 914.4281045751634 96.9 L 945.6372549019608 104.4" fill="none"></path></g><g clip-path="none" transform="translate(10,55)" zIndex="0.1" visibility="visible" class="highcharts-markers"><path stroke-width="1" stroke="#FFFFFF" d="M 945.6372549019608 100.4 C 950.9652549019607 100.4 950.9652549019607 108.4 945.6372549019608 108.4 C 940.3092549019608 108.4 940.3092549019608 100.4 945.6372549019608 100.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 914.4281045751634 92.9 C 919.7561045751634 92.9 919.7561045751634 100.9 914.4281045751634 100.9 C 909.1001045751634 100.9 909.1001045751634 92.9 914.4281045751634 92.9 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 883.218954248366 224 C 888.546954248366 224 888.546954248366 232 883.218954248366 232 C 877.890954248366 232 877.890954248366 224 883.218954248366 224 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 852.0098039215686 228.4 C 857.3378039215686 228.4 857.3378039215686 236.4 852.0098039215686 236.4 C 846.6818039215686 236.4 846.6818039215686 228.4 852.0098039215686 228.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 820.8006535947712 79.3 C 826.1286535947712 79.3 826.1286535947712 87.3 820.8006535947712 87.3 C 815.4726535947713 87.3 815.4726535947713 79.3 820.8006535947712 79.3 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 789.5915032679738 27 C 794.9195032679738 27 794.9195032679738 35 789.5915032679738 35 C 784.2635032679739 35 784.2635032679739 27 789.5915032679738 27 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 758.3823529411765 56.8 C 763.7103529411764 56.8 763.7103529411764 64.8 758.3823529411765 64.8 C 753.0543529411765 64.8 753.0543529411765 56.8 758.3823529411765 56.8 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 727.1732026143791 57.4 C 732.501202614379 57.4 732.501202614379 65.4 727.1732026143791 65.4 C 721.8452026143791 65.4 721.8452026143791 57.4 727.1732026143791 57.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 695.9640522875817 60.099999999999994 C 701.2920522875817 60.099999999999994 701.2920522875817 68.1 695.9640522875817 68.1 C 690.6360522875817 68.1 690.6360522875817 60.099999999999994 695.9640522875817 60.099999999999994 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 664.7549019607843 218.1 C 670.0829019607843 218.1 670.0829019607843 226.1 664.7549019607843 226.1 C 659.4269019607843 226.1 659.4269019607843 218.1 664.7549019607843 218.1 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 633.5457516339869 209.4 C 638.8737516339869 209.4 638.8737516339869 217.4 633.5457516339869 217.4 C 628.217751633987 217.4 628.217751633987 209.4 633.5457516339869 209.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 602.3366013071895 91.2 C 607.6646013071895 91.2 607.6646013071895 99.2 602.3366013071895 99.2 C 597.0086013071896 99.2 597.0086013071896 91.2 602.3366013071895 91.2 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 571.1274509803922 100.5 C 576.4554509803921 100.5 576.4554509803921 108.5 571.1274509803922 108.5 C 565.7994509803922 108.5 565.7994509803922 100.5 571.1274509803922 100.5 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 539.9183006535948 49.7 C 545.2463006535947 49.7 545.2463006535947 57.7 539.9183006535948 57.7 C 534.5903006535948 57.7 534.5903006535948 49.7 539.9183006535948 49.7 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 508.7091503267974 27.1 C 514.0371503267974 27.1 514.0371503267974 35.1 508.7091503267974 35.1 C 503.3811503267974 35.1 503.3811503267974 27.1 508.7091503267974 27.1 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 477.5 47.5 C 482.828 47.5 482.828 55.5 477.5 55.5 C 472.172 55.5 472.172 47.5 477.5 47.5 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 446.2908496732026 209.1 C 451.6188496732026 209.1 451.6188496732026 217.1 446.2908496732026 217.1 C 440.96284967320264 217.1 440.96284967320264 209.1 446.2908496732026 209.1 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 415.08169934640523 201.4 C 420.4096993464052 201.4 420.4096993464052 209.4 415.08169934640523 209.4 C 409.75369934640526 209.4 409.75369934640526 201.4 415.08169934640523 201.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 383.87254901960785 20 C 389.2005490196078 20 389.2005490196078 28 383.87254901960785 28 C 378.54454901960787 28 378.54454901960787 20 383.87254901960785 20 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 352.66339869281046 34 C 357.99139869281044 34 357.99139869281044 42 352.66339869281046 42 C 347.3353986928105 42 347.3353986928105 34 352.66339869281046 34 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 321.4542483660131 33.2 C 326.78224836601305 33.2 326.78224836601305 41.2 321.4542483660131 41.2 C 316.1262483660131 41.2 316.1262483660131 33.2 321.4542483660131 33.2 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 290.2450980392157 28.4 C 295.57309803921567 28.4 295.57309803921567 36.4 290.2450980392157 36.4 C 284.9170980392157 36.4 284.9170980392157 28.4 290.2450980392157 28.4 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 259.0359477124183 66.2 C 264.3639477124183 66.2 264.3639477124183 74.2 259.0359477124183 74.2 C 253.7079477124183 74.2 253.7079477124183 66.2 259.0359477124183 66.2 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 227.8267973856209 224.3 C 233.1547973856209 224.3 233.1547973856209 232.3 227.8267973856209 232.3 C 222.4987973856209 232.3 222.4987973856209 224.3 227.8267973856209 224.3 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 196.6176470588235 219.7 C 201.9456470588235 219.7 201.9456470588235 227.7 196.6176470588235 227.7 C 191.2896470588235 227.7 191.2896470588235 219.7 196.6176470588235 219.7 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 165.40849673202612 90.6 C 170.73649673202613 90.6 170.73649673202613 98.6 165.40849673202612 98.6 C 160.08049673202612 98.6 160.08049673202612 90.6 165.40849673202612 90.6 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 134.19934640522874 56.9 C 139.52734640522874 56.9 139.52734640522874 64.9 134.19934640522874 64.9 C 128.87134640522873 64.9 128.87134640522873 56.9 134.19934640522874 56.9 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 102.99019607843137 58.3 C 108.31819607843137 58.3 108.31819607843137 66.3 102.99019607843137 66.3 C 97.66219607843136 66.3 97.66219607843136 58.3 102.99019607843137 58.3 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 71.78104575163398 48.5 C 77.10904575163399 48.5 77.10904575163399 56.5 71.78104575163398 56.5 C 66.45304575163398 56.5 66.45304575163398 48.5 71.78104575163398 48.5 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 40.5718954248366 116.5 C 45.8998954248366 116.5 45.8998954248366 124.5 40.5718954248366 124.5 C 35.243895424836595 124.5 35.243895424836595 116.5 40.5718954248366 116.5 Z" fill="#4572A7"></path><path stroke-width="1" stroke="#FFFFFF" d="M 9.362745098039214 235.7 C 14.690745098039214 235.7 14.690745098039214 243.7 9.362745098039214 243.7 C 4.034745098039214 243.7 4.034745098039214 235.7 9.362745098039214 235.7 Z" fill="#4572A7"></path></g><g clip-path="url(#highcharts-2)" transform="translate(10,55)" zIndex="0.1" visibility="visible" class="highcharts-series"><path transform="translate(1, 1)" stroke-opacity="0.049999999999999996" isShadow="true" zIndex="1" stroke-width="5" stroke="black" d="M 9.362745098039214 281.8 L 40.5718954248366 238.3 L 71.78104575163398 200.4 L 102.99019607843137 212 L 134.19934640522874 209.3 L 165.40849673202612 215.7 L 196.6176470588235 268.3 L 227.8267973856209 276.7 L 259.0359477124183 209.2 L 290.2450980392157 187.5 L 321.4542483660131 193.6 L 352.66339869281046 191.7 L 383.87254901960785 183.3 L 415.08169934640523 262.5 L 446.2908496732026 268.4 L 477.5 199.7 L 508.7091503267974 192 L 539.9183006535948 202.4 L 571.1274509803922 225.9 L 602.3366013071895 216.8 L 633.5457516339869 269.5 L 664.7549019607843 273.9 L 695.9640522875817 217 L 727.1732026143791 216 L 758.3823529411765 217.3 L 789.5915032679738 183 L 820.8006535947712 222.4 L 852.0098039215686 279.7 L 883.218954248366 276.6 L 914.4281045751634 226.7 L 945.6372549019608 233.3" fill="none"></path><path transform="translate(1, 1)" stroke-opacity="0.09999999999999999" isShadow="true" zIndex="1" stroke-width="3" stroke="black" d="M 9.362745098039214 281.8 L 40.5718954248366 238.3 L 71.78104575163398 200.4 L 102.99019607843137 212 L 134.19934640522874 209.3 L 165.40849673202612 215.7 L 196.6176470588235 268.3 L 227.8267973856209 276.7 L 259.0359477124183 209.2 L 290.2450980392157 187.5 L 321.4542483660131 193.6 L 352.66339869281046 191.7 L 383.87254901960785 183.3 L 415.08169934640523 262.5 L 446.2908496732026 268.4 L 477.5 199.7 L 508.7091503267974 192 L 539.9183006535948 202.4 L 571.1274509803922 225.9 L 602.3366013071895 216.8 L 633.5457516339869 269.5 L 664.7549019607843 273.9 L 695.9640522875817 217 L 727.1732026143791 216 L 758.3823529411765 217.3 L 789.5915032679738 183 L 820.8006535947712 222.4 L 852.0098039215686 279.7 L 883.218954248366 276.6 L 914.4281045751634 226.7 L 945.6372549019608 233.3" fill="none"></path><path transform="translate(1, 1)" stroke-opacity="0.15" isShadow="true" zIndex="1" stroke-width="1" stroke="black" d="M 9.362745098039214 281.8 L 40.5718954248366 238.3 L 71.78104575163398 200.4 L 102.99019607843137 212 L 134.19934640522874 209.3 L 165.40849673202612 215.7 L 196.6176470588235 268.3 L 227.8267973856209 276.7 L 259.0359477124183 209.2 L 290.2450980392157 187.5 L 321.4542483660131 193.6 L 352.66339869281046 191.7 L 383.87254901960785 183.3 L 415.08169934640523 262.5 L 446.2908496732026 268.4 L 477.5 199.7 L 508.7091503267974 192 L 539.9183006535948 202.4 L 571.1274509803922 225.9 L 602.3366013071895 216.8 L 633.5457516339869 269.5 L 664.7549019607843 273.9 L 695.9640522875817 217 L 727.1732026143791 216 L 758.3823529411765 217.3 L 789.5915032679738 183 L 820.8006535947712 222.4 L 852.0098039215686 279.7 L 883.218954248366 276.6 L 914.4281045751634 226.7 L 945.6372549019608 233.3" fill="none"></path><path zIndex="1" stroke-width="2" stroke="#AA4643" d="M 9.362745098039214 281.8 L 40.5718954248366 238.3 L 71.78104575163398 200.4 L 102.99019607843137 212 L 134.19934640522874 209.3 L 165.40849673202612 215.7 L 196.6176470588235 268.3 L 227.8267973856209 276.7 L 259.0359477124183 209.2 L 290.2450980392157 187.5 L 321.4542483660131 193.6 L 352.66339869281046 191.7 L 383.87254901960785 183.3 L 415.08169934640523 262.5 L 446.2908496732026 268.4 L 477.5 199.7 L 508.7091503267974 192 L 539.9183006535948 202.4 L 571.1274509803922 225.9 L 602.3366013071895 216.8 L 633.5457516339869 269.5 L 664.7549019607843 273.9 L 695.9640522875817 217 L 727.1732026143791 216 L 758.3823529411765 217.3 L 789.5915032679738 183 L 820.8006535947712 222.4 L 852.0098039215686 279.7 L 883.218954248366 276.6 L 914.4281045751634 226.7 L 945.6372549019608 233.3" fill="none"></path></g><g clip-path="none" transform="translate(10,55)" zIndex="0.1" visibility="visible" class="highcharts-markers"><path stroke-width="1" stroke="#FFFFFF" d="M 945.6372549019608 229.3 L 949.6372549019608 233.3 945.6372549019608 237.3 941.6372549019608 233.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 914.4281045751634 222.7 L 918.4281045751634 226.7 914.4281045751634 230.7 910.4281045751634 226.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 883.218954248366 272.6 L 887.218954248366 276.6 883.218954248366 280.6 879.218954248366 276.6 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 852.0098039215686 275.7 L 856.0098039215686 279.7 852.0098039215686 283.7 848.0098039215686 279.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 820.8006535947712 218.4 L 824.8006535947712 222.4 820.8006535947712 226.4 816.8006535947712 222.4 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 789.5915032679738 179 L 793.5915032679738 183 789.5915032679738 187 785.5915032679738 183 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 758.3823529411765 213.3 L 762.3823529411765 217.3 758.3823529411765 221.3 754.3823529411765 217.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 727.1732026143791 212 L 731.1732026143791 216 727.1732026143791 220 723.1732026143791 216 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 695.9640522875817 213 L 699.9640522875817 217 695.9640522875817 221 691.9640522875817 217 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 664.7549019607843 269.9 L 668.7549019607843 273.9 664.7549019607843 277.9 660.7549019607843 273.9 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 633.5457516339869 265.5 L 637.5457516339869 269.5 633.5457516339869 273.5 629.5457516339869 269.5 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 602.3366013071895 212.8 L 606.3366013071895 216.8 602.3366013071895 220.8 598.3366013071895 216.8 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 571.1274509803922 221.9 L 575.1274509803922 225.9 571.1274509803922 229.9 567.1274509803922 225.9 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 539.9183006535948 198.4 L 543.9183006535948 202.4 539.9183006535948 206.4 535.9183006535948 202.4 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 508.7091503267974 188 L 512.7091503267974 192 508.7091503267974 196 504.7091503267974 192 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 477.5 195.7 L 481.5 199.7 477.5 203.7 473.5 199.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 446.2908496732026 264.4 L 450.2908496732026 268.4 446.2908496732026 272.4 442.2908496732026 268.4 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 415.08169934640523 258.5 L 419.08169934640523 262.5 415.08169934640523 266.5 411.08169934640523 262.5 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 383.87254901960785 179.3 L 387.87254901960785 183.3 383.87254901960785 187.3 379.87254901960785 183.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 352.66339869281046 187.7 L 356.66339869281046 191.7 352.66339869281046 195.7 348.66339869281046 191.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 321.4542483660131 189.6 L 325.4542483660131 193.6 321.4542483660131 197.6 317.4542483660131 193.6 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 290.2450980392157 183.5 L 294.2450980392157 187.5 290.2450980392157 191.5 286.2450980392157 187.5 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 259.0359477124183 205.2 L 263.0359477124183 209.2 259.0359477124183 213.2 255.0359477124183 209.2 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 227.8267973856209 272.7 L 231.8267973856209 276.7 227.8267973856209 280.7 223.8267973856209 276.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 196.6176470588235 264.3 L 200.6176470588235 268.3 196.6176470588235 272.3 192.6176470588235 268.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 165.40849673202612 211.7 L 169.40849673202612 215.7 165.40849673202612 219.7 161.40849673202612 215.7 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 134.19934640522874 205.3 L 138.19934640522874 209.3 134.19934640522874 213.3 130.19934640522874 209.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 102.99019607843137 208 L 106.99019607843137 212 102.99019607843137 216 98.99019607843137 212 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 71.78104575163398 196.4 L 75.78104575163398 200.4 71.78104575163398 204.4 67.78104575163398 200.4 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 40.5718954248366 234.3 L 44.5718954248366 238.3 40.5718954248366 242.3 36.5718954248366 238.3 Z" fill="#AA4643"></path><path stroke-width="1" stroke="#FFFFFF" d="M 9.362745098039214 277.8 L 13.362745098039214 281.8 9.362745098039214 285.8 5.362745098039214 281.8 Z" fill="#AA4643"></path></g></g><text zIndex="4" class="highcharts-title" text-anchor="middle" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:16px;color:#3E576F;fill:#3E576F;" y="25" x="488"><tspan x="488">Daily visits at www.highcharts.com</tspan></text><text zIndex="4" class="highcharts-subtitle" text-anchor="middle" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:12px;color:#6D869F;fill:#6D869F;" y="40" x="488"><tspan x="488">Source: Google Analytics</tspan></text><g transform="translate(10,30)" zIndex="7" class="highcharts-legend"><g clip-path="url(#highcharts-1)" zIndex="1"><g><g transform="translate(8,3)" zIndex="1" class="highcharts-legend-item"><path stroke="#4572A7" stroke-width="4" d="M 0 11 L 16 11" fill="none"></path><path stroke-width="1" stroke="#FFFFFF" d="M 8 7 C 13.328 7 13.328 15 8 15 C 2.6719999999999997 15 2.6719999999999997 7 8 7 Z" fill="#4572A7"></path><text zIndex="2" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:12px;cursor:pointer;color:#3E576F;fill:#3E576F;" y="15" x="21"><tspan x="21">All visits</tspan></text></g><g transform="translate(87.84375,3)" zIndex="1" class="highcharts-legend-item"><path stroke="#AA4643" stroke-width="2" d="M 0 11 L 16 11" fill="none"></path><path stroke-width="1" stroke="#FFFFFF" d="M 8 7 L 12 11 8 15 4 11 Z" fill="#AA4643"></path><text zIndex="2" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:12px;cursor:pointer;color:#3E576F;fill:#3E576F;" y="15" x="21"><tspan x="21">New visitors</tspan></text></g></g></g></g><g zIndex="7" class="highcharts-axis-labels"><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#666;line-height:14px;fill:#666;" y="368" x="53.5718954248366"><tspan x="53.5718954248366">6. Sep</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#666;line-height:14px;fill:#666;" y="368" x="272.0359477124183"><tspan x="272.0359477124183">13. Sep</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#666;line-height:14px;fill:#666;" y="368" x="490.5"><tspan x="490.5">20. Sep</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#666;line-height:14px;fill:#666;" y="368" x="708.9640522875817"><tspan x="708.9640522875817">27. Sep</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#666;line-height:14px;fill:#666;" y="368" x="927.4281045751634"><tspan x="927.4281045751634">4. Oct</tspan></text></g><g zIndex="7" class="highcharts-axis-labels"><text visibility="hidden" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="0" x="0"><tspan x="0">0</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="308" x="13"><tspan x="13">1,000</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="229" x="13"><tspan x="13">2,000</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="150" x="13"><tspan x="13">3,000</tspan></text><text visibility="visible" text-anchor="start" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="71" x="13"><tspan x="13">4,000</tspan></text></g><g zIndex="7" class="highcharts-axis-labels"><text visibility="hidden" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="0" x="0"><tspan x="0">0</tspan></text><text visibility="visible" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="308" x="962"><tspan x="962">1,000</tspan></text><text visibility="visible" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="229" x="962"><tspan x="962">2,000</tspan></text><text visibility="visible" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="150" x="962"><tspan x="962">3,000</tspan></text><text visibility="visible" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:458px;color:#666;line-height:14px;fill:#666;" y="71" x="962"><tspan x="962">4,000</tspan></text></g><g transform="translate(94,60)" visibility="hidden" style="padding:0;white-space:nowrap;" zIndex="8" class="highcharts-tooltip"><rect transform="translate(1, 1)" stroke-opacity="0.049999999999999996" stroke="black" isShadow="true" fill-opacity="0.85" stroke-width="5" height="51" width="130" y="0" x="0" fill="none" ry="5" rx="5"></rect><rect transform="translate(1, 1)" stroke-opacity="0.09999999999999999" stroke="black" isShadow="true" fill-opacity="0.85" stroke-width="3" height="51" width="130" y="0" x="0" fill="none" ry="5" rx="5"></rect><rect transform="translate(1, 1)" stroke-opacity="0.15" stroke="black" isShadow="true" fill-opacity="0.85" stroke-width="1" height="51" width="130" y="0" x="0" fill="none" ry="5" rx="5"></rect><rect anchorY="-2" anchorX="-12" stroke="#4572A7" fill-opacity="0.85" stroke-width="2" height="51" width="130" y="0" x="0" fill="rgb(255,255,255)" ry="5" rx="5"></rect><text zIndex="1" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:12px;color:#333333;fill:#333333;" y="18" x="5"><tspan x="5" style="font-size: 10px">Tuesday, Sep 7, 2010</tspan><tspan x="5" dy="13" style="fill:#4572A7">All visits</tspan><tspan dx="3">: </tspan><tspan dx="3" style="font-weight:bold">3,336</tspan><tspan x="5" dy="15" style="fill:#AA4643">New visitors</tspan><tspan dx="3">: </tspan><tspan dx="3" style="font-weight:bold">1,463</tspan></text></g><text zIndex="8" text-anchor="end" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:10px;cursor:pointer;color:#909090;fill:#909090;" y="395" x="965"><tspan x="965">Highcharts.com</tspan></text><g zIndex="9" class="highcharts-tracker"><g transform="translate(10,55)" zIndex="1" visibility="visible"><path style="cursor:pointer;" stroke-width="24" stroke="rgb(192,192,192)" stroke-opacity="0.000001" visibility="visible" stroke-linejoin="bevel" isTracker="true" d="M -0.6372549019607856 239.7 L 9.362745098039214 239.7 L 40.5718954248366 120.5 L 71.78104575163398 52.5 L 102.99019607843137 62.3 L 134.19934640522874 60.9 L 165.40849673202612 94.6 L 196.6176470588235 223.7 L 227.8267973856209 228.3 L 259.0359477124183 70.2 L 290.2450980392157 32.4 L 321.4542483660131 37.2 L 352.66339869281046 38 L 383.87254901960785 24 L 415.08169934640523 205.4 L 446.2908496732026 213.1 L 477.5 51.5 L 508.7091503267974 31.1 L 539.9183006535948 53.7 L 571.1274509803922 104.5 L 602.3366013071895 95.2 L 633.5457516339869 213.4 L 664.7549019607843 222.1 L 695.9640522875817 64.1 L 727.1732026143791 61.4 L 758.3823529411765 60.8 L 789.5915032679738 31 L 820.8006535947712 83.3 L 852.0098039215686 232.4 L 883.218954248366 228 L 914.4281045751634 96.9 L 945.6372549019608 104.4 L 955.6372549019608 104.4" fill="none"></path></g><g transform="translate(10,55)" zIndex="1" visibility="visible"><path style="cursor:pointer;" stroke-width="22" stroke="rgb(192,192,192)" stroke-opacity="0.000001" visibility="visible" stroke-linejoin="bevel" isTracker="true" d="M -0.6372549019607856 281.8 L 9.362745098039214 281.8 L 40.5718954248366 238.3 L 71.78104575163398 200.4 L 102.99019607843137 212 L 134.19934640522874 209.3 L 165.40849673202612 215.7 L 196.6176470588235 268.3 L 227.8267973856209 276.7 L 259.0359477124183 209.2 L 290.2450980392157 187.5 L 321.4542483660131 193.6 L 352.66339869281046 191.7 L 383.87254901960785 183.3 L 415.08169934640523 262.5 L 446.2908496732026 268.4 L 477.5 199.7 L 508.7091503267974 192 L 539.9183006535948 202.4 L 571.1274509803922 225.9 L 602.3366013071895 216.8 L 633.5457516339869 269.5 L 664.7549019607843 273.9 L 695.9640522875817 217 L 727.1732026143791 216 L 758.3823529411765 217.3 L 789.5915032679738 183 L 820.8006535947712 222.4 L 852.0098039215686 279.7 L 883.218954248366 276.6 L 914.4281045751634 226.7 L 945.6372549019608 233.3 L 955.6372549019608 233.3" fill="none"></path></g></g><rect stroke="#B0B0B0" zIndex="19" transform="translate(941,10)" stroke-width="1" height="19" width="23" y="0.5" x="0.5" fill="url(#highcharts-5)" ry="3" rx="3"></rect><rect stroke="#B0B0B0" zIndex="19" transform="translate(915,10)" stroke-width="1" height="19" width="23" y="0.5" x="0.5" fill="url(#highcharts-6)" ry="3" rx="3"></rect><path zIndex="20" stroke-width="1" stroke="#A0A0A0" transform="translate(941,10)" d="M 5.5 16.5 L 17.5 16.5 17.5 14.5 5.5 14.5 Z M 11.5 14.5 L 15.5 9.5 10.5 9.5 10.5 4.5 12.5 4.5 12.5 9.5 7.5 9.5 Z" fill="#A8BF77"></path><path zIndex="20" stroke-width="1" stroke="#A0A0A0" transform="translate(915,10)" d="M 5.5 12.5 L 17.5 12.5 17.5 9.5 5.5 9.5 Z M 7.5 9.5 L 7.5 4.5 15.5 4.5 15.5 9.5 Z M 7.5 12.5 L 5.5 16.5 17.5 16.5 15.5 12.5 Z" fill="#B5C9DF"></path><rect style="cursor:pointer;" zIndex="21" title="Export to raster or vector image" fill-opacity="0.001" id="exportButton" stroke-width="0" height="20" width="24" y="10" x="941" fill="rgb(255,255,255)" ry="0" rx="0"><title>Export to raster or vector image</title></rect><rect style="cursor:pointer;" zIndex="21" title="Print the chart" fill-opacity="0.001" id="printButton" stroke-width="0" height="20" width="24" y="10" x="915" fill="rgb(255,255,255)" ry="0" rx="0"><title>Print the chart</title></rect></svg></div></div>
+	</div>
+	<div style="margin: 1em">
+	
+		
+		<div class="buttons">
+			<a href="javascript:" onclick="hs.htmlExpand(this, { width: 800,
+					headingText: 'Highcharts Configuration Preview', 
+					wrapperClassName: 'draggable-header' })">
+				View options</a>
+			<div class="highslide-maincontent">
+				<pre>$(function () {
+    var chart;
+    $(document).ready(function() {
+    
+        // define the options
+        var options = {
+    
+            chart: {
+                renderTo: 'container'
+            },
+    
+            title: {
+                text: 'Daily visits at www.highcharts.com'
+            },
+    
+            subtitle: {
+                text: 'Source: Google Analytics'
+            },
+    
+            xAxis: {
+                type: 'datetime',
+                tickInterval: 7 * 24 * 3600 * 1000, // one week
+                tickWidth: 0,
+                gridLineWidth: 1,
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: -3
+                }
+            },
+    
+            yAxis: [{ // left y axis
+                title: {
+                    text: null
+                },
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: 16,
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value, 0);
+                    }
+                },
+                showFirstLabel: false
+            }, { // right y axis
+                linkedTo: 0,
+                gridLineWidth: 0,
+                opposite: true,
+                title: {
+                    text: null
+                },
+                labels: {
+                    align: 'right',
+                    x: -3,
+                    y: 16,
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value, 0);
+                    }
+                },
+                showFirstLabel: false
+            }],
+    
+            legend: {
+                align: 'left',
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                borderWidth: 0
+            },
+    
+            tooltip: {
+                shared: true,
+                crosshairs: true
+            },
+    
+            plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                hs.htmlExpand(null, {
+                                    pageOrigin: {
+                                        x: this.pageX,
+                                        y: this.pageY
+                                    },
+                                    headingText: this.series.name,
+                                    maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) +':&lt;br/&gt; '+
+                                        this.y +' visits',
+                                    width: 200
+                                });
+                            }
+                        }
+                    },
+                    marker: {
+                        lineWidth: 1
+                    }
+                }
+            },
+    
+            series: [{
+                name: 'All visits',
+                lineWidth: 4,
+                marker: {
+                    radius: 4
+                }
+            }, {
+                name: 'New visitors'
+            }]
+        };
+    
+    
+        // Load data asynchronously using jQuery. On success, add the data
+        // to the options and initiate the chart.
+        // This data is obtained by exporting a GA custom report to TSV.
+        // http://api.jquery.com/jQuery.get/
+        jQuery.get('analytics.tsv', null, function(tsv, state, xhr) {
+            var lines = [],
+                listen = false,
+                date,
+    
+                // set up the two data series
+                allVisits = [],
+                newVisitors = [];
+    
+            // inconsistency
+            if (typeof tsv !== 'string') {
+                tsv = xhr.responseText;
+            }
+    
+            // split the data return into lines and parse them
+            tsv = tsv.split(/\n/g);
+            jQuery.each(tsv, function(i, line) {
+    
+                // listen for data lines between the Graph and Table headers
+                if (tsv[i - 3] == '# Graph') {
+                    listen = true;
+                } else if (line == '' || line.charAt(0) == '#') {
+                    listen = false;
+                }
+    
+                // all data lines start with a double quote
+                if (listen) {
+                    line = line.split(/\t/);
+                    date = Date.parse(line[0] +' UTC');
+    
+                    allVisits.push([
+                        date,
+                        parseInt(line[1].replace(',', ''), 10)
+                    ]);
+                    newVisitors.push([
+                        date,
+                        parseInt(line[2].replace(',', ''), 10)
+                    ]);
+                }
+            });
+    
+            options.series[0].data = allVisits;
+            options.series[1].data = newVisitors;
+    
+            chart = new Highcharts.Chart(options);
+        });
+    });
+    
+});</pre>
+			</div>
+			
+			
+						
+			
+			<a href="http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/line-ajax/">
+				Edit in jsFiddle</a>
+			
+						<a id="previous-example" title="Previous (arrow left)" href="http://www.highcharts.com/demo/line-basic">« Previous</a>
+						
+						<a id="next-example" title="Next (arrow right)" href="http://www.highcharts.com/demo/line-labels">Next »</a>
+					</div>
+		
+		
+	</div>
+	
+
+</div>
+
+
+<script type="text/javascript">
+	Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
+	var highchartsOptions = Highcharts.getOptions(); 
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="line-ajax_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2995052-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+
+<div style="padding: 0px; border: medium none; margin: 0px; position: absolute; left: 0px; top: 0px; width: 100%; z-index: 1001; direction: ltr;" class="highslide-container"><a style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;" href="javascript:;" title="Click to cancel" class="highslide-loading">Loading...</a><div style="display: none;"></div><div style="padding: 0px; border: medium none; margin: 0px; visibility: hidden; display: none;" class="highslide-viewport highslide-viewport-size"></div><table style="padding: 0px; border: medium none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 20px; z-index: 1004; left: 333.781px; top: 215.5px; display: none;" cellspacing="0"><tbody style="padding: 0px; border: medium none; margin: 0px;"><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px 0px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -40px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px 0px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -80px transparent; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border: medium none; margin: 0px; position: relative; width: 0px; height: 0px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -80px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -20px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -60px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -20px transparent; height: 20px; width: 20px;"></td></tr></tbody></table><a class=" " style="display: none;"></a><div style="padding: 0px; border: medium none; margin: 0px; visibility: visible; position: absolute; z-index: 1005; left: 343.781px; top: 225.5px; width: 0px; height: 0px; display: none;" class="highslide-wrapper draggable-header" id="highslide-wrapper-0"><div style="position: relative; z-index: 3; height: 0px; overflow: hidden; width: 0px; left: 0px; top: 0px; visibility: visible; cursor: default;" class="highslide-html"><div style="padding: 0px; border: medium none; margin: 0px; position: relative; width: auto; left: -104.781px; top: -47.5px;"><div style="position: relative; display: block; direction: ltr; width: auto; border: medium none; height: auto; visibility: visible;" class="highslide-html-content"><div class="highslide-header"><ul><li class="highslide-previous"><a href="#" title="Previous (arrow left)" onclick="return hs.previous(this)"><span>Previous</span></a></li><li class="highslide-next"><a href="#" title="Next (arrow right)" onclick="return hs.next(this)"><span>Next</span></a></li><li class="highslide-move"><a href="#" title="Move" onclick="return false"><span>Move</span></a></li><li class="highslide-close"><a href="#" title="Close (esc)" onclick="return hs.close(this)"><span>Close</span></a></li></ul></div><div style="padding: 0px; border: medium none; margin: 0px; overflow: auto; width: 190px; height: 50px; position: relative;"><div class="highslide-body"><div style="display: block;" class="highslide-maincontent">Tuesday, Sep 7, 2010:<br> 3336 visits</div></div></div><div class="highslide-footer"><div><span class="highslide-resize" title="Resize"><span></span></span></div></div></div></div></div></div><table style="padding: 0px; border: medium none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 0px;" cellspacing="0"><tbody style="padding: 0px; border: medium none; margin: 0px;"><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px 0px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -40px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px 0px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -80px transparent; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border: medium none; margin: 0px; position: relative;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -80px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: medium none; margin: 0px; height: auto;"><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -20px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -60px transparent; height: 20px; width: 20px;"></td><td style="padding: 0px; border: medium none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://www.highcharts.com/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -20px transparent; height: 20px; width: 20px;"></td></tr></tbody></table><div style="padding: 0px; border: medium none; margin: 0px; position: absolute; width: 200px; height: 95px; visibility: hidden; overflow: visible; z-index: auto; top: -9999px; left: 0px;" class=""><div style="padding: 0px; border: medium none; margin: 0px; position: absolute; visibility: visible; width: auto; direction: ltr; opacity: 1; height: auto; left: 0px; right: 0px; bottom: 100%; z-index: 4;" id="hsId0"><div style="display: block;" class="highslide-heading highslide-move">All visits</div></div></div></div></body></html>

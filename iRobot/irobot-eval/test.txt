@@ -1,0 +1,4 @@
+"StrField"|"ValueField"|"Url"
+"aaa"|"111"|"http://msn.com"
+"bbb"|"222"|"http://yahoo.com"
+"ccc"|"333"|"http://google.com"

@@ -1,0 +1,310 @@
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;zoom:1;margin:0;padding:0;} 
+:focus{outline:0;} 
+body{color:#000;background:#fff;} 
+ol,ul{list-style:none;} 
+table{border-collapse:separate;border-spacing:0;} 
+caption,th,td{text-align:left;font-weight:400;} 
+blockquote:before,blockquote:after,q:before,q:after{content:"";} 
+a{text-decoration:none;} 
+a:hover{text-decoration:underline;} 
+.clear{clear:both;} 
+.float-left{float:left;} 
+.float-right{float:right;} 
+.text-left{text-align:left;} 
+.text-right{text-align:right;} 
+.text-center{text-align:center;} 
+.text-justify{text-align:justify;} 
+.bold{font-weight:700;} 
+.italic{font-style:italic;} 
+.underline{border-bottom:1px solid;} 
+.highlight{background:#ffc;} 
+.wrap{width:960px;margin:0 auto;} 
+.img-left{float:left;margin:4px 10px 4px 0;} 
+.img-right{float:right;margin:4px 0 4px 10px;} 
+.nopadding{padding:0;} 
+.noindent{margin-left:0;padding-left:0;} 
+.nobullet{list-style:none;list-style-image:none;} 
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;} 
+.clearfix{display:block;} 
+* html .clearfix{height:1%;} 
+img.alignright,a img.alignright{float:right;margin:0 0 1em 1em;} 
+img.alignleft,a img.alignleft{float:left;margin:0 1em 1em 0;} 
+img.aligncenter,a img.aligncenter{display:block;margin-left:auto;margin-right:auto;}
+/* style */
+html{-webkit-font-smoothing:antialiased;}
+body{font-size:13px;text-align:center;background:#FBFAED url(../../../images/fuelly/v2/pbg.gif) top center;color:#bfbfbf;font-family:Helvetica, Arial, sans-serif;margin:0;}
+#wrap{position:relative;width:1113px;overflow:hidden;margin:auto;}
+#head{float:left;width:161px;text-align:left;}
+#logo{position:relative;display:block;height:158px;text-indent:-9999em;margin-bottom:10px;background:url(../../../images/fuelly/v2/logo200.png) top left;background-size:100%;}
+#switchUnits{color:#777;font-size:11px;text-align:center;margin:0 0 12px;}
+#switchUnits > EM{color:#777;font-weight:700;}
+#add{position:relative;height:30px;line-height:30px;color:#fff;padding-left:45px;background:#000 url(../../../images/fuelly/v2/nav.png) 18px 6px no-repeat;font-size:16px;display:block;text-decoration:none;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}
+#add:hover{background-color:#3ABAAE;background-position:18px -337px;}
+#nav li a{color:#000;height:30px;display:block;line-height:30px;padding-left:45px;border-bottom:1px solid #F5F3EE;}
+#nav li a:hover{text-decoration:none;color:#3ABAAE;}
+.n1{background:url(../../../images/fuelly/v2/nav.png) 16px -27px no-repeat;}
+.n2{background:url(../../../images/fuelly/v2/nav.png) 16px -58px no-repeat;}
+.n3{background:url(../../../images/fuelly/v2/nav.png) 16px -89px no-repeat;}
+.n4{background:url(../../../images/fuelly/v2/nav.png) 16px -119px no-repeat;}
+.n5{background:url(../../../images/fuelly/v2/nav.png) 16px -150px no-repeat;}
+.n1:hover{background-position:16px -370px;}
+.n2:hover{background-position:16px -401px;}
+.n3:hover{background-position:16px -432px;}
+.n4:hover{background-position:16px -462px;}
+.n5:hover{background-position:16px -493px;}
+#head strong{height:30px;line-height:30px;padding-left:45px;color:#A8A79F;display:block;}
+.garage li a{color:#000;display:block;line-height:15px;border-top:1px solid #F5F3EE;border-bottom:1px solid #F5F3EE;margin-bottom:-1px;padding:8px 0 8px 45px;}
+.garage a:hover,.garage li.active a{background-color:#F3F1E5;text-decoration:none;}
+a.vehicle{background:url(../../../images/fuelly/v2/nav.png) 16px -213px no-repeat;}
+a.add-vehicle{background:url(../../../images/fuelly/v2/nav.png) 16px -301px no-repeat;}
+a.vehicle:hover{background-position:16px -556px;}
+a.add-vehicle:hover{background-position:16px -644px;}
+#content{float:left;width:580px;color:#000;text-align:left;background-color:#FBFAED;padding:50px 5px 0 29px;}
+#content P.copy,#content DIV.copy > P{line-height:130%;margin-bottom:6px;text-align:justify;}
+.smallcopy{font-size:11px;color:#888;}
+#content A{color:#25776F;}
+#content A:hover{color:#3ABAAE;text-decoration:underline;}
+#content h2{position:relative;font-size:26px;color:#B1B0AC;padding-bottom:4px;}
+#content > h3{position:relative;font-size:18px;color:#333;padding:10px 0 2px;}
+.vehicle-image{text-align:right;float:right;}
+#vehicle a{text-transform:uppercase;color:#B6B3A4;font-size:11px;font-weight:400;}
+#vehicle a.owner{font-weight:700;text-transform:lowercase;color:#FFB713;padding-left:14px;background:url(../../../images/fuelly/v2/head.png) left center no-repeat;}
+#vehicle .vehicle-image p{padding-bottom:0;}
+#stats{position:relative;overflow:hidden;padding-bottom:10px;}
+#stats li{float:left;height:118px;width:184px;border:1px solid #CAC9C3;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;text-align:center;overflow:hidden;background-color:#FFF;}
+#stats li.latest-mileage{margin:0 10px;}
+#stats strong{color:#666;height:56px;display:block;font-size:56px;font-weight:700;padding-top:5px;padding-bottom:4px;}
+#stats em{display:block;height:22px;line-height:22px;font-weight:700;color:#3ABAAE;font-size:14px;padding:3px 0 2px;}
+#stats p{height:30px;line-height:30px;background:#F3F1E5;font-size:12px;-moz-border-radius:0 0 10px 10px;-webkit-border-radius:0 0 10px 10px;border-radius:0 0 10px 10px;}
+#details{position:relative;overflow:hidden;margin-bottom:20px;}
+#details h4{padding:4px 0 10px;}
+#costs{float:right;width:185px;}
+#costs ul{height:256px;position:relative;border-right:2px solid #ECE8D4;background:#fff url(../../../images/fuelly/v2/cpg.gif) bottom left no-repeat;padding:20px 0 10px;}
+#costs li{position:relative;height:64px;text-align:right;padding-right:18px;}
+#costs strong{font-size:33px;font-weight:700;}
+#costs em{display:block;}
+#charting{float:left;width:382px;}
+#miles{position:relative;overflow:hidden;margin-bottom:15px;border-bottom:1px solid #E2E1D8;}
+#miles p{overflow:hidden;position:relative;padding-bottom:8px;}
+#miles span{float:left;width:51px;height:69px;line-height:75px;font-weight:700;font-size:60px;color:#fff;margin-right:3px;text-align:center;background:url(../../../images/fuelly/v2/panel.gif) top left no-repeat;}
+#total{float:right;width:182px;height:190px;background:url(../../../images/fuelly/v2/gallons-bg.png) top left no-repeat;}
+#total-fuelups{bottom:65px;color:#FFF;font-size:42px;line-height:42px;position:absolute;font-weight:700;text-align:center;width:70px;border:0;display:block;margin-left:13px;}
+#total-average{bottom:58px;color:#999;font-size:9px;letter-spacing:.5px;line-height:11px;position:absolute;font-weight:300;text-align:left;border:0;display:block;margin-left:118px;}
+#total > H4{bottom:0;position:absolute;}
+#pie{float:left;width:157px;}
+#cityDriving,#highwayDriving{color:#fff;font-size:30px;position:absolute;z-index:5000;font-weight:700;}
+#cityDriving{bottom:80px;left:82px;}
+#highwayDriving{bottom:114px;left:20px;}
+.graph{position:relative;background:#fff;text-align:center;margin-bottom:20px;padding:12px 0;}
+#log th{font-weight:700;padding:5px;}
+#log tbody tr:nth-child(odd){background:#fff;}
+#log tbody tr:nth-child(even){background:#efefef;}
+.col-edit{width:40px;}
+a.edit{display:block;height:16px;width:15px;background:url(../../../images/fuelly/v2/table-edit.gif) center no-repeat;}
+.col-date,.col-gallons,.col-price{width:70px;}
+.col-miles,.col-mpg,.col-citypct{width:60px;}
+#log td{vertical-align:top;padding:8px 0 8px 5px;}
+#sidebar{float:right;width:300px;text-align:left;}
+.advert{position:relative;padding-bottom:30px;}
+#sidebar h3{position:relative;font-size:26px;color:#B1B0AC;padding-bottom:16px;padding-left:36px;}
+#sidebar h3 em{display:block;font-size:12px;}
+.widget{padding-bottom:30px;}
+.recent{position:relative;color:#000;}
+.recent li{padding:0 0 1.2em 36px;}
+#content .recent li{min-height:28px;margin-bottom:5px;border-bottom:1px solid #E2E1D8;padding:1px 0 1px 36px;}
+.recent em,.recent a.via{color:#B1B0AC!important;}
+#sidebar a,.recent a{color:#3ABAAE;}
+.widget p{padding-left:36px;}
+.widget p a{text-transform:uppercase;font-weight:700;font-size:10px;}
+.type1{background:url(../../../images/fuelly/v2/activity3.png) 6px 0 no-repeat;}
+.type1c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1000px no-repeat;}
+.type2{background:url(../../../images/fuelly/v2/activity3.png) 6px -100px no-repeat;}
+.type2c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1100px no-repeat;}
+.type3{background:url(../../../images/fuelly/v2/activity3.png) 6px -200px no-repeat;}
+.type3c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1200px no-repeat;}
+.type4{background:url(../../../images/fuelly/v2/activity3.png) 6px -300px no-repeat;}
+.type4c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1300px no-repeat;}
+.type7{background:url(../../../images/fuelly/v2/activity3.png) 6px -500px no-repeat;}
+.type7c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1500px no-repeat;}
+.type12{background:url(../../../images/fuelly/v2/activity3.png) 6px -600px no-repeat;}
+.type12c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1600px no-repeat;}
+.type13,.type14{background:url(../../../images/fuelly/v2/activity3.png) 6px -700px no-repeat;}
+.type13c,.type14c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1700px no-repeat;}
+#tips{position:relative;margin-right:22px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;color:#111;margin-bottom:30px;background:#F9E8BB url(../../../images/fuelly/v2/tip-bg.gif) top right no-repeat;padding:18px 18px 18px 36px;margin-left:7px;}
+#tips h4{font-size:26px;color:#B1B0AC;padding-bottom:6px;}
+#tips p{line-height:1.8em;}
+.badge{position:relative;overflow:hidden;margin-left:36px;font-size:10px;text-transform:uppercase;font-weight:700;color:#3ABAAE;}
+.badge img{float:left;margin-right:10px;line-height:13px;}
+#footer{clear:both;color:#8B897D;text-align:left;padding:100px 0 50px;}
+#footer p,#footer ul,#footer li{display:inline;}
+#footer li:before{content:" | ";}
+sup{font-size:70%;letter-spacing:3px;}
+#costs-period-box{background-color:#F9E8BB;font-size:12px;line-height:13px;width:170px;position:absolute;z-index:100;right:3px;bottom:20px;display:none;-moz-border-radius:5px;-webkit-border-radius:5px;padding:5px;}
+#costs-period-box ul{margin:0;padding:0;}
+#costs-period-box li{margin:0 0 6px 10px;}
+#cost-period-cancel{color:#999!important;margin-left:110px;}
+#error-box{background-color:#F9E8BB;font-size:11px;margin:0 100px 10px 0;padding:10px;}
+#error-box UL{list-style-type:disc;margin:8px 0 0 2px;}
+#error-box UL LI{margin:2px 0 3px 25px;}
+TABLE.form TH{text-align:right;font-weight:700;color:#555;vertical-align:top;padding:5px 2px 2px 30px;}
+TABLE.form TD{vertical-align:top;padding:3px;}
+TABLE.form INPUT[type=submit]{margin:2px 2px 2px 0;}
+UL.bullets{list-style-type:disc;margin:2px 0 10px 2px;}
+#car-widget .badge-graph{text-align:center;background:#fff;color:#000;border:solid #ccc 1px;width:125px;height:66px;float:left;margin:5px 5px 0 0;padding:15px 0;}
+#car-widget .badge{text-align:center;background:#fff;color:#000;border:solid #ccc 1px;width:60px;height:66px;float:left;margin:5px 5px 0 0;padding:15px;}
+#car-widget .badge-value{font-size:24px;font-weight:700;}
+#car-widget .badge-change{font-size:12px;margin-bottom:8px;}
+#car-widget .badge-title{font-size:11px;font-weight:400;white-space:nowrap;}
+#car-widget .changedown{color:#a03;}
+#car-widget .changeup{color:green;}
+#car-widget .nochange{color:#aaa;}
+#car-widget .stats{width:140px;border-right:solid #ccc 1px;background:#fff;}
+#car-widget .last{border-right:none;}
+#car-widget .stats-value{font-weight:700;font-size:160%;}
+#car-widget .message{background:#20a6b4;border:solid #000 1px;width:570px;padding:10px;}
+#car-widget{cursor:pointer;margin-bottom:14px;}
+#car-widget H3{font-size:18px;}
+#car-widget P{margin:2px 0;}
+#tools-nav{position:absolute;z-index:2100;left:30px;display:none;}
+#tools-nav LI{background-color:#F9E8BB;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#tools-nav LI A{padding-left:20px;padding-right:20px;}
+#maintabs{border-bottom:1px solid #aaa;list-style-type:none;text-align:left;margin:0 0 10px;padding:3px 0 3px 10px;}
+#maintabs li{display:inline;font-size:12px;margin:0;}
+#maintabs li a{text-decoration:none;margin-right:3px;border:1px solid #aaa;border-bottom:none;background-color:#F9E8BB;color:#555;border-top-left-radius:5px;border-top-right-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;-webkit-border-top-left-radius:10px 5px;-webkit-border-top-right-radius:10px 5px;padding:3px 7px;}
+#maintabs li a:visited{color:#555;}
+#maintabs li a:hover{background-color:#3ABAAE;color:#FBFAED;}
+#maintabs li.selected a{position:relative;top:1px;padding-top:4px;background-color:#FBFAED;color:#555;}
+OL.numbered{list-style-type:decimal;margin-left:20px;}
+OL.numbered H3{font-size:22px;color:#333;margin-bottom:5px;}
+#home_items > LI{margin-bottom:25px;}
+#home_items STRONG{font-weight:700;display:block;margin-top:10px;}
+.topcars{margin:8px 0 10px;}
+.topcars > LI{margin-bottom:5px;margin-left:10px;}
+#content P.copy + H2{margin:20px 0 0;}
+#content HR{height:1px;color:#aaa;background-color:#aaa;}
+#fuelup_notice{width:420px;background-color:#F9E8BB;position:absolute;top:110px;left:260px;z-index:3000;-moz-box-shadow:2px 2px 5px #bbb;-webkit-box-shadow:2px 2px 5px #bbb;box-shadow:2px 2px 5px #bbb;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:10px 20px;}
+#fuelup_notice > H3{font-size:16px;color:#555;}
+#fuelup_notice > UL > LI{margin:0 0 4px;}
+#fuelup_notice_dismiss{color:#999!important;margin-left:350px;}
+#stats-mini{position:relative;overflow:hidden;padding-bottom:20px;}
+#stats-mini ul li,#epa_estimates ul li,#potential_savings ul li,.log-entry ul li{float:left;height:72px;width:139px;border:1px solid #CAC9C3;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;text-align:center;overflow:hidden;background-color:#FFF;margin:0 4px 4px 0;}
+#stats-mini ul strong,#epa_estimates ul strong,#potential_savings ul strong,.log-entry ul strong{color:#666;height:26px;display:block;font-size:26px;font-weight:700;padding-top:5px;padding-bottom:0;}
+#stats-mini ul em,#epa_estimates ul em,#potential_savings ul em,.log-entry ul em{display:block;height:14px;line-height:14px;font-weight:700;color:#3ABAAE;font-size:12px;padding:3px 0 2px;}
+#stats-mini ul p,#epa_estimates ul p,#potential_savings ul p,.log-entry ul p{height:22px;line-height:22px;background:#F3F1E5;font-size:12px;-moz-border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;}
+UL#mini_stats_admin > LI > SELECT{width:125px;margin-top:5px;}
+UL#mini_stats_admin > LI > DIV{margin-top:5px;font-size:10px;}
+.log-entry{margin-top:5px;}
+.log-entry + H3{margin-top:10px;}
+.log-entry .log-notes{background-color:#F9E8BB;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;margin:0 5px 4px 0;padding:10px;}
+.log-entry ul li{height:53px;width:110px;}
+#log + H2,#epa_estimates + H2,#potential_savings + H2,#browse_similar + H2,#admin_controls + H2{padding-top:20px;clear:both;}
+#profileMsg{float:right;background:#F9E8BB;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;-moz-box-shadow:2px 2px 5px #bbb;-webkit-box-shadow:2px 2px 5px #bbb;box-shadow:2px 2px 5px #bbb;margin:0 0 10px;padding:10px 50px;}
+UL.browse-by-car-display > LI{display:block;float:left;height:95px;overflow:hidden;margin:0;padding:0;}
+UL.browse-by-car-display > LI.image{background:#000 url(../../../images/fuelly/v2/no-car-image-square.gif) no-repeat center center;width:100px;-webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;border-radius:10px 0 0 10px;border:1px solid #D6D6D6;border-right:0;}
+UL.browse-by-car-display > LI.image-moto{background:#000 url(../../../images/fuelly/v2/no-moto-image-square.gif) no-repeat center center;width:100px;-webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;border-radius:10px 0 0 10px;border:1px solid #D6D6D6;border-right:0;}
+UL.browse-by-car-display > LI.image > IMG{border:0;width:68px;}
+UL.browse-by-car-display > LI.details{background-color:#FFF;width:380px;border:1px solid #D6D6D6;border-right:0;border-left:0;}
+UL.browse-by-car-display > LI.details > DIV{margin:5px 5px 0 10px;}
+UL.browse-by-car-display a.owner{font-weight:700;text-transform:lowercase;color:#FFB713!important;padding-left:14px;background:url(../../../images/fuelly/v2/head.png) left center no-repeat;}
+UL.browse-by-car-display > LI.performance{background-color:#2F978D;width:90px;text-align:center;color:#FFF;-webkit-border-radius:0 10px 10px 0;-moz-border-radius:0 10px 10px 0;border-radius:0 10px 10px 0;border:1px solid #D6D6D6;border-left:0;}
+UL.browse-by-car-display > LI.performance > strong{font-size:26px;display:block;margin:23px 0 2px;}
+UL.browse-by-car-display > LI.performance > p{font-size:10px;font-weight:700;margin-top:4px;letter-spacing:.5px;}
+#collapse-sidebar{background:transparent url(../../../scripts/fuelly/v2/dataTables/forward_disabled.gif) no-repeat left top;height:35px;display:block;margin:3px 0 0 7px;padding:4px 0 0 25px;}
+#expand-sidebar{background:transparent url(../../../scripts/fuelly/v2/dataTables/back_disabled.gif) no-repeat left top;height:35px;display:block;overflow:hidden;margin:5px 0 0;padding:4px 0 0 325px;}
+UL.browse-year-summary > LI{display:block;float:left;overflow:hidden;border:1px solid #D6D6D6;margin:0;padding:0;}
+UL.browse-year-summary > LI.yr{height:85px;width:180px;background-color:#000;color:#FFF;font-weight:700;font-size:64px;text-align:center;-webkit-border-radius:10px 0 0 0;-moz-border-radius:10px 0 0;border-radius:10px 0 0 0;border-right:0;border-bottom:0;}
+UL.browse-year-summary > LI.yr > span{display:block;margin-top:13px;}
+UL.browse-year-summary > LI.ph1,UL.browse-year-summary > LI.ph2,UL.browse-year-summary > LI.ph3{height:85px;width:133px;background:#000 url() no-repeat center center;border:1px solid #D6D6D6;border-right:0;border-left:0;border-bottom:0;}
+UL.browse-year-summary > LI.ph3{-webkit-border-radius:0 10px 0 0;-moz-border-radius:0 10px 0 0;border-radius:0 10px 0 0;border-right:1px;background-image:url(../../../images/fuelly/v2/no-car-image-square.gif);}
+UL.browse-year-summary > LI.avg{height:110px;width:180px;background-color:#2F978D;text-align:center;color:#FFF;-webkit-border-radius:0 0 0 10px;-moz-border-radius:0 0 0 10px;border-radius:0 0 0 10px;border:1px solid #D6D6D6;border-right:0;border-top:0;}
+UL.browse-year-summary > LI.avg > STRONG{font-size:72px;margin-top:12px;display:block;}
+UL.browse-year-summary > LI.avg > P{font-size:14px;letter-spacing:2px;margin-top:-5px;}
+UL.browse-year-summary > LI.stats{background-color:#FFF;width:398px;height:110px;text-align:center;color:#FFF;-webkit-border-radius:0 0 10px 0;-moz-border-radius:0 0 10px;border-radius:0 0 10px 0;border:1px solid #D6D6D6;border-left:0;border-top:0;}
+UL.browse-year-summary > LI.stats > UL{margin:26px 0 10px;}
+UL.browse-year-summary > LI.stats > UL > LI{display:block;float:left;overflow:hidden;color:#000;text-align:center;width:130px;margin:0;padding:0;}
+UL.browse-year-summary > LI.stats > UL > LI > STRONG{font-size:32px;display:block;margin:0 0 2px;}
+UL.browse-year-summary > LI.stats > UL > LI > P{font-size:12px;font-weight:700;margin-top:2px;letter-spacing:.5px;}
+UL.browse-year-summary > LI.stats > A{clear:both;display:block;text-decoration:underline;padding:10px;}
+.dataTables_wrapper{position:relative;min-height:302px;clear:both;_height:302px;zoom:1;}
+.dataTables_processing{position:absolute;top:50%;left:50%;width:250px;height:30px;margin-left:-125px;margin-top:-15px;border:1px solid #aaa;text-align:center;color:#555;font-size:14px;background-color:#F9E8BB;z-index:3000;-moz-box-shadow:2px 2px 9px #bbb;-webkit-box-shadow:2px 2px 9px #bbb;-moz-border-radius:5px;-webkit-border-radius:5px;padding:14px 0 2px;}
+.dataTables_length{width:40%;float:left;}
+.dataTables_filter{width:50%;float:right;text-align:right;}
+.dataTables_info{width:60%;float:left;color:#777;padding:6px;}
+.dataTables_paginate{width:50px;float:right;text-align:right;padding:3px;}
+.paginate_disabled_previous,.paginate_enabled_previous,.paginate_disabled_next,.paginate_enabled_next{height:19px;width:19px;margin-left:3px;float:left;}
+.paginate_disabled_previous{background-image:url(../../../scripts/fuelly/v2/dataTables/back_disabled.gif);}
+.paginate_enabled_previous{background-image:url(../../../scripts/fuelly/v2/dataTables/back_enabled.gif);}
+.paginate_disabled_next{background-image:url(../../../scripts/fuelly/v2/dataTables/forward_disabled.gif);}
+.paginate_enabled_next{background-image:url(../../../scripts/fuelly/v2/dataTables/forward_enabled.gif);}
+table.display{clear:both;width:100%;margin:0 auto;}
+table.display thead th{border-bottom:1px solid #ababab;font-weight:700;cursor:hand;padding:3px 18px 3px 10px;}
+table.display tfoot th{border-top:1px solid #ababab;font-weight:700;padding:3px 18px 3px 10px;}
+table.display tr.heading2 td{border-bottom:1px solid #aaa;}
+table.display td{padding:3px 10px;}
+.sorting_asc{background:url(../../../scripts/fuelly/v2/dataTables/sort_asc.gif) no-repeat center right;}
+.sorting_desc{background:url(../../../scripts/fuelly/v2/dataTables/sort_desc.gif) no-repeat center right;}
+.sorting{background:url(../../../scripts/fuelly/v2/dataTables/sort_both.gif) no-repeat center right;}
+.sorting_asc_disabled{background:url(../../../scripts/fuelly/v2/dataTables/sort_asc_disabled.gif) no-repeat center right;}
+.sorting_desc_disabled{background:url(../../../scripts/fuelly/v2/dataTables/sort_desc_disabled.gif) no-repeat center right;}
+.dataTables_scrollBody{margin-top:-1px;}
+.top,.bottom{background-color:#F5F5F5;border:1px solid #CCC;padding:15px;}
+.top .dataTables_info{float:none;}
+tfoot input{width:100%;color:#444;margin:.5em 0;}
+tfoot input.search_init{color:#999;}
+td.group{background-color:#d1cfd0;border-bottom:2px solid #A19B9E;border-top:2px solid #A19B9E;}
+.example_alt_pagination div.dataTables_info{width:40%;}
+.paging_full_numbers{width:400px;height:22px;line-height:22px;}
+.paging_full_numbers span.paginate_button,.paging_full_numbers span.paginate_active{border:1px solid #aaa;-webkit-border-radius:5px;-moz-border-radius:5px;cursor:hand;margin:0 3px;padding:2px 5px;}
+.paging_full_numbers span.paginate_button{background-color:#ddd;}
+.paging_full_numbers span.paginate_button:hover{background-color:#ccc;}
+.paging_full_numbers span.paginate_active{background-color:#99B3FF;}
+table.display tr.even.row_selected td{background-color:#B0BED9;}
+table.display tr.odd.row_selected td{background-color:#9FAFD1;}
+#tooltip{position:absolute;z-index:3000;padding:5px 10px;}
+#tooltip h3,#tooltip div{margin:0;}
+.tooltipFuelLogFilter UL{list-style-type:disc;margin:2px 0 8px 2px;}
+.tooltipFuelLogFilter UL LI EM{color:#333;float:right;opacity:0.4;}
+#logo:hover,#switchUnits > A:hover{opacity:.8;}
+#switchUnits > A,#cost-period-change,#costs-period-box a{color:#3ABAAE;font-weight:700;}
+#nav,#nav li,#log table{position:relative;}
+.garage li,#vehicle{position:relative;overflow:hidden;}
+#vehicle h1,UL.browse-by-car-display h1{font-size:26px;font-weight:700;}
+#vehicle h4,UL.browse-by-car-display h4{font-weight:700;padding-bottom:0;}
+#vehicle p,UL.browse-by-car-display p{line-height:1.5em;padding-bottom:2em;}
+#vehicle .date,UL.browse-by-car-display .date{color:#B6B3A4;}
+#stats li.average-mileage strong,#costs li.average-cost{color:#FFB713;}
+.recent a.v,.recent strong,#tips strong,#error-box strong,.tooltipFuelLogFilter STRONG{font-weight:700;}
+.recent em,.recent li span.mpg{white-space:nowrap;}
+.type5,.type6{background:url(../../../images/fuelly/v2/activity3.png) 6px -400px no-repeat;}
+.type5c,.type6c{background:url(../../../images/fuelly/v2/activity3.png) 6px -1400px no-repeat;}
+#footer a,#maintabs li a:active{color:#000;}
+UL.bullets > LI,.tooltipFuelLogFilter UL LI{margin:2px 0 3px 15px;}
+#fuelup_notice > UL,#fuelup_notice > P.copy{margin:5px 0 15px 10px;}
+.log-entry .log-by,.dataTables_scroll,.clear{clear:both;}
+UL.browse-by-car-display,UL.browse-year-summary{clear:both;display:block;cursor:pointer;margin:0;}
+DIV.browse-by-car-spacer,DIV.browse-year-summary{clear:both;height:10px;}
+table.display td.center,.dataTables_empty{text-align:center;}
+.tooltipFuelLog,.tooltipFuelLogFilter{width:220px;background-color:#F9E8BB;font-size:13px;line-height:17px;text-align:left;color:#000;opacity:1;-moz-box-shadow:2px 2px 5px #bbb;-webkit-box-shadow:2px 2px 5px #bbb;-moz-border-radius:5px;-webkit-border-radius:5px;padding:5px 10px;}
+.button{color: #fff;font: bold 12px Helvetica, Arial, sans-serif;text-decoration: none;padding: 7px 12px;position: relative;
+display: inline-block;text-shadow: 0 1px 0 #6e6e6e;-webkit-transition: border-color .218s;-moz-transition: border .218s;-o-transition: border-color .218s;transition: border-color .218s;background: #31ac9e;background: -webkit-gradient(linear,0% 40%,0% 70%,from(#33b5a6),to(#31ac9e));background: -moz-linear-gradient(linear,0% 40%,0% 70%,from(#33b5a6),to(#31ac9e));border: solid 1px #dcdcdc;border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;} 
+.button:hover{background:#31ac9e;-moz-box-shadow:0 2px 0 rgba(0,0,0,0.2) 0 2px 5px rgba(0,0,0,0.2);box-shadow:0 1px 2px rgba(0,0,0,0.15);border-color:#999;} 
+.button:active{color:#fff;border-color:#444;}
+.google-ad{margin:0 0 10px 0;} 
+.google-label a{color:#999!important;text-transform:uppercase;font-size:10px;font-weight:400;padding:3px 3px 3px 0;} 
+.google-text{overflow:hidden;line-height:140%;padding:6px 0;}
+.google-text{color:#000!important;}
+.google-text a{color:#25776F!important;}
+.google-text a:hover{color:#3ABAAE!important;}
+.google-text-last{padding-bottom:0;} 
+.google-html{min-height:200px;}
+.url{font-size:16px;font-weight:700;} 
+.visible-url{color:#25776F!important;font-size:11px;font-weight:400;}
+@media screen and (max-width: 1023px) {
+	body {background-image:url('')!important;}
+	#wrap {width:840px;}
+	#content {width:580px;}
+	#sidebar {display:none;}
+	.bap-trigger {display:none!important;}
+}
+.flag{display:inline-block;width:22px;height:11px;margin-top:-2px;margin-left:3px;vertical-align:middle;border:solid #eee 1px;}

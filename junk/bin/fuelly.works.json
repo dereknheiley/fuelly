@@ -1,0 +1,9 @@
+{ "data" : [
+{"x":30.3, "y":150, "m":"Adly Thunder Bike 150", "url": "http://www.fuelly.com/motorcycle/Adly/Thunder Bike 150", "marker":{"radius":2, "states":{"hover":{"radius":4}}}},
+{"x":37.3, "y":125, "m":"AJS JS 125 E", "url": "http://www.fuelly.com/motorcycle/AJS/JS 125 E", "marker":{"radius":2, "states":{"hover":{"radius":4}}}},
+{"x":25.5, "y":500, "m":"Aprilia Atlantic 500", "url": "http://www.fuelly.com/motorcycle/Aprilia/Atlantic 500", "marker":{"radius":2, "states":{"hover":{"radius":4}}}},
+
+{"x":33.0, "y":150, "m":"ZNEN Motor ZN150T-18", "url": "http://www.fuelly.com/motorcycle/ZNEN/Motor ZN150T-18", "marker":{"radius":2, "states":{"hover":{"radius":4}}}},
+{"x":29.6, "y":150, "m":"ZNEN Motor ZN150T-9", "url": "http://www.fuelly.com/motorcycle/ZNEN/Motor ZN150T-9", "marker":{"radius":2, "states":{"hover":{"radius":4}}}},
+{"x":32.0, "y":150, "m":"Zongshen zn150t-24", "url": "http://www.fuelly.com/motorcycle/Zongshen/zn150t-24", "marker":{"radius":2, "states":{"hover":{"radius":4}}}}	
+]}

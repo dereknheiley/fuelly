@@ -1,0 +1,13 @@
+sport
+sporttouring
+touring
+street
+scooter
+offroad	-Dirt
+	-Motorcross
+	-Supermoto
+	-Enduro
+	-DualSport
+cruiser
+chopper
+threewheel

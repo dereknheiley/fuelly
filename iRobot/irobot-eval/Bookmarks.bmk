@@ -1,0 +1,5 @@
+﻿<Bookmark IrbFile="%BookmarkDir%\automate_it.irb" IrbTask="save page" IrbPass="" Description="save page text/image"></Bookmark>
+<Bookmark IrbFile="%BookmarkDir%\automate_it.irb" IrbTask="repeat click focused" IrbPass="" Description="keep clicking it"></Bookmark>
+<Bookmark IrbFile="%BookmarkDir%\automate_it.irb" IrbTask="save form values" IrbPass="" Description="extract form values"></Bookmark>
+<Bookmark IrbFile="%BookmarkDir%\automate_it.irb" IrbTask="apply form values" IrbPass="" Description="apply form values"></Bookmark>
+<Bookmark IrbFile="%BookmarkDir%\automate_it.irb" IrbTask="save marked text" IrbPass="" Description="save marked text"></Bookmark>

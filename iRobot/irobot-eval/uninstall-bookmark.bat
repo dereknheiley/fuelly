@@ -1,0 +1,1 @@
+irobot.exe /bookmark uninstall /exit 

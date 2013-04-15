@@ -1,0 +1,139 @@
+
+<BODY bgColor=white><H1>Name Table Fields</H1>
+<HR>
+
+<P>
+<FORM method=post name=transform action=irobot://CListPaths/NameTable><INPUT value=update type=hidden name=action> <INPUT value=first type=hidden name=path> <INPUT value=6 type=hidden name=path_item> <INPUT value=C:\Users\Derek\Dropbox\fuelly\iRobot\irobot-eval\system\$tmp_property_source_page.html type=hidden name=sample_source_file> 
+<TABLE border=0 align=left>
+<TBODY>
+<TR>
+<TD vAlign=top align=left>
+<TABLE border=1 borderColor=#000000 align=left>
+<TBODY>
+<TR>
+<TH bgColor=#ffcc00>Column</TH>
+<TH bgColor=#ffcc00>Name</TH>
+<TH bgColor=#ffcc00>Transformation</TH></TR>
+<TR>
+<TD>COLUMN1</TD>
+<TD><INPUT name=name_0></TD>
+<TD><SELECT name=trans_0> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN2</TD>
+<TD><INPUT name=name_1></TD>
+<TD><SELECT name=trans_1> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN3</TD>
+<TD><INPUT name=name_2></TD>
+<TD><SELECT name=trans_2> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN4</TD>
+<TD><INPUT name=name_3></TD>
+<TD><SELECT name=trans_3> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN5</TD>
+<TD><INPUT name=name_4></TD>
+<TD><SELECT name=trans_4> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN6</TD>
+<TD><INPUT name=name_5></TD>
+<TD><SELECT name=trans_5> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR>
+<TR>
+<TD>COLUMN7</TD>
+<TD><INPUT name=name_6></TD>
+<TD><SELECT name=trans_6> <OPTION selected value="">--Original content--</OPTION> <OPTION value=":tx &amp;trim">Exclude enclosed tags</OPTION> <OPTION value="&amp;tx &amp;trim('','111')">Exclude all tags</OPTION> <OPTION value="&amp;tx &amp;trim('','121')">Exclude all tags and line breaks</OPTION> <OPTION value=:st&amp;url_all>Only the start-tag</OPTION> <OPTION value="&amp;get_url &amp;url">Absolute url of hyperlink</OPTION> <OPTION value=".<img>:src&amp;url">Absolute url of image</OPTION> <OPTION value=&amp;url_all>Transform to absolute links</OPTION> <OPTION value="&amp;text_words('text')">Get the first text</OPTION> <OPTION value=:value>Input value</OPTION> <OPTION value=:name>Input name</OPTION> <OPTION value=&amp;get_date>Get a date</OPTION> <OPTION value=&amp;get_number>Get a number</OPTION> <OPTION value="&amp;get_email('%m')">Get email</OPTION></SELECT></TD></TR></TBODY></TABLE>
+<P><INPUT value=" Update " type=submit> <INPUT value=" Reset " type=reset> <INPUT onclick=history.go(-1) value=" Return " type=button> </P></TD></TR>
+<TR>
+<TD vAlign=top align=left>
+<TABLE border=1 borderColor=#000000 width="100%" align=left>
+<TBODY>
+<TR>
+<TH bgColor=#ffcc88>COLUMN1</TH>
+<TH bgColor=#ffcc88>COLUMN2</TH>
+<TH bgColor=#ffcc88>COLUMN3</TH>
+<TH bgColor=#ffcc88>COLUMN4</TH>
+<TH bgColor=#ffcc88>COLUMN5</TH>
+<TH bgColor=#ffcc88>COLUMN6</TH>
+<TH bgColor=#ffcc88>COLUMN7</TH></TR>
+<TR>
+<TD>Newter the Scooter.</TD>
+<TD>2010 Aprilia Scarabeo 500ie</TD>
+<TD>Added Jun 2012 Property of bef2111 .</TD>
+<TD>Added Jun 2012</TD>
+<TD>Property of</TD>
+<TD>bef2111</TD>
+<TD></TD></TR>
+<TR>
+<TD>lil beo.</TD>
+<TD>2010 Aprilia Scarabeo 500ie</TD>
+<TD>Added Jun 2012 • 1 fuel-up Property$</TD>
+<TD>Added Jun 2012</TD>
+<TD>Property of</TD>
+<TD>ZValdovinos</TD>
+<TD></TD></TR>
+<TR>
+<TD>Beo 500.</TD>
+<TD>2009 Aprilia Scarabeo 500ie</TD>
+<TD>Added Sep 2009 • 7 fuel-ups Propert$</TD>
+<TD>Added Sep 2009</TD>
+<TD>Property of</TD>
+<TD>onlinemike</TD>
+<TD>(null)</TD></TR>
+<TR>
+<TD>Beo 500 ie.</TD>
+<TD>2009 Aprilia Scarabeo 500ie</TD>
+<TD>Added Mar 2012 • 6 fuel-ups Propert$</TD>
+<TD>Added Mar 2012</TD>
+<TD>Property of</TD>
+<TD>ButtPlugg</TD>
+<TD></TD></TR>
+<TR>
+<TD>mighty touring machine.</TD>
+<TD>2009 Aprilia Scarabeo 500ie</TD>
+<TD>Added Apr 2012 Property of rcan08 .</TD>
+<TD>Added Apr 2012</TD>
+<TD>Property of</TD>
+<TD>rcan08</TD>
+<TD></TD></TR>
+<TR>
+<TD>Scarabeo.</TD>
+<TD>2008 Aprilia Scarabeo 500ie</TD>
+<TD>Added May 2012 • 8 fuel-ups Propert$</TD>
+<TD>Added May 2012</TD>
+<TD>Property of</TD>
+<TD>bfeley</TD>
+<TD></TD></TR>
+<TR>
+<TD>Big Bug.</TD>
+<TD>2007 Aprilia Scarabeo 500ie</TD>
+<TD>Added Mar 2010 • 195 fuel-ups Prope$</TD>
+<TD>Added Mar 2010</TD>
+<TD>Property of</TD>
+<TD>mythdraug</TD>
+<TD></TD></TR>
+<TR>
+<TD>Beo.</TD>
+<TD>2007 Aprilia Scarabeo 500ie</TD>
+<TD>Added Jul 2010 • 52 fuel-ups Proper$</TD>
+<TD>Added Jul 2010</TD>
+<TD>Property of</TD>
+<TD>jdmady</TD>
+<TD></TD></TR>
+<TR>
+<TD>Fredo.</TD>
+<TD>2007 Aprilia Scarabeo 500ie</TD>
+<TD>Added Jun 2009 • 44 fuel-ups Proper$</TD>
+<TD>Added Jun 2009</TD>
+<TD>Property of</TD>
+<TD>ssbillyd</TD>
+<TD>(null)</TD></TR>
+<TR>
+<TD>La Strega.</TD>
+<TD>2007 Aprilia Scarabeo 500ie</TD>
+<TD>Added Aug 2010 • 9 fuel-ups Propert$</TD>
+<TD>Added Aug 2010</TD>
+<TD>Property of</TD>
+<TD>Pancho</TD>
+<TD></TD></TR></TBODY></TABLE><BR>
+<HR>
+<INPUT value="  Update  " type=submit> </TD></TR></TBODY></TABLE></FORM></P></BODY>

@@ -120,7 +120,7 @@
 										fontWeight: 'bold'
 									}
 								},
-								min: <?php if($unit<1) echo "0"; else echo "7.5"; ?>,
+								min: <?php if($unit<1) echo "1"; elseif($unit==1) echo "7.5"; elseif($unit==2.35215) echo "15"; else echo "20"; ?>,
 								startOnTick: false,
 								endOnTick: false,
 								showLastLabel: true
@@ -225,7 +225,7 @@
 		     
 			<p>Currently showing <?php echo $counter; ?> of a possible  <b>1,000</b> data points (per data series).<br></p>
 			<script src="fuelly/highcharts.js"></script>
-			<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto">
+			<div id="container" style="min-width: 400px; min-height: 500px; margin: 0 auto">
 			</div>
 			<script type="text/javascript">
 				Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
